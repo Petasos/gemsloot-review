@@ -123,7 +123,7 @@
   .big-stats .num { font-family: 'Barlow Condensed', sans-serif; font-size: 72px; font-weight: 800; line-height: 1; letter-spacing: -0.01em; }
   .big-stats .label { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: oklch(0.5 0.01 90); text-transform: uppercase; margin-top: 10px; }
 
-  .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+  .proof-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px; align-items: stretch; }
   .proof-col { display: flex; flex-direction: column; gap: 24px; }
   .proof-frame { border: 1px solid oklch(0 0 0 / 0.15); border-radius: 6px; overflow: hidden; cursor: zoom-in; flex: 1; }
   .proof-frame img { display: block; width: 100%; height: auto; }
@@ -267,12 +267,16 @@
     </div>
     <div class="proof-grid">
       <div class="proof-col">
+        <div class="proof-frame" data-lightbox="assets/coinbase-payout.png" data-alt="Coinbase receipt confirming receipt of a Litecoin withdrawal">
+          <img src="assets/coinbase-payout.png" alt="Coinbase receipt confirming receipt of a Litecoin withdrawal" loading="lazy">
+        </div>
+        <div class="proof-caption">Coinbase — receiving side of the payout</div>
+      </div>
+      <div class="proof-col">
         <div class="proof-frame" data-lightbox="assets/gemsloot-payout.png" data-alt="Gemsloot dashboard showing completed crypto cashout payments">
           <img src="assets/gemsloot-payout.png" alt="Gemsloot dashboard showing completed crypto cashout payments" loading="lazy">
         </div>
         <div class="proof-caption">Real Gemsloot dashboard — cashout history, crypto payouts completed</div>
-      </div>
-      <div class="proof-col">
         <div class="proof-frame" data-lightbox="assets/blockexplorer-payout.png" data-alt="Block explorer record confirming an on-chain Litecoin transaction">
           <img src="assets/blockexplorer-payout.png" alt="Block explorer record confirming an on-chain Litecoin transaction" loading="lazy">
         </div>
