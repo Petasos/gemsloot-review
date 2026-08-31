@@ -251,7 +251,12 @@
   .author-note p { margin: 0; font-size: 15px; line-height: 1.65; color: oklch(0.38 0 0); text-wrap: pretty; }
 
   .chart-block { margin-top: 56px; }
-  .chart-block svg { display: block; width: 100%; height: auto; border: 1px solid oklch(0 0 0 / 0.15); border-radius: 6px; }
+  .chart-frame { border: 1px solid oklch(0 0 0 / 0.15); border-radius: 6px; overflow: hidden; cursor: zoom-in; }
+  .chart-frame svg { display: block; width: 100%; height: auto; }
+  .chart-foot { display: flex; align-items: baseline; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; }
+  .chart-foot .proof-caption { max-width: 620px; }
+  .chart-zoom { margin-top: 12px; padding: 9px 18px; font-size: 11px; background: none; cursor: zoom-in; flex: none; }
+  .chart-zoom:hover { border-color: oklch(0 0 0 / 0.6); }
 
   .tier-note { max-width: 680px; margin: 72px auto 0; text-align: left; }
   .tier-note .lead { margin-bottom: 32px; }
@@ -314,7 +319,20 @@
     cursor: zoom-out;
   }
   #lightbox.open { display: flex; }
+  /* the sticky header has a backdrop-filter, so it stays legible through the
+     overlay unless it is taken out while the lightbox is open */
+  body.lightbox-open header { visibility: hidden; }
   #lightbox img { max-width: min(900px, 90vw); max-height: 90vh; width: auto; height: auto; border-radius: 8px; box-shadow: 0 20px 60px oklch(0 0 0 / 0.5); }
+  #lightbox .lightbox-figure {
+    flex: none;
+    width: 100%;
+    max-height: 90vh;
+    overflow: auto;
+    background: oklch(0.97 0.01 90);
+    border-radius: 8px;
+    box-shadow: 0 20px 60px oklch(0 0 0 / 0.5);
+  }
+  #lightbox .lightbox-figure svg { display: block; width: max(800px, min(100%, 154vh)); height: auto; }
   #lightbox .close { position: absolute; top: 32px; right: 40px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: oklch(0.9 0 0); letter-spacing: 0.04em; text-transform: uppercase; }
 
   footer { border-top: 1px solid oklch(0 0 0 / 0.1); padding: 48px 56px; max-width: 1200px; margin: 0 auto; }
@@ -332,6 +350,8 @@
     .pc-grid { grid-template-columns: 1fr; gap: 40px; }
     .vs-table { grid-template-columns: 1.2fr 1fr 1fr; font-size: 13px; }
     footer { padding: 48px 24px; }
+    #lightbox { padding: 16px; }
+    #lightbox .close { top: 16px; right: 20px; }
   }
 </style>
 </head>
@@ -417,86 +437,91 @@
       </div>
     </div>
     <div class="chart-block">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="100%" role="img" aria-label="Line chart titled Cashed out from Gemsloot. Cumulative completed withdrawals from a personal Gemsloot account, month by month, from July 2025 to August 2026. Values in US dollars: July 2025, 5.87; August 2025, 10.02; September 2025, 10.02, a flat month with no withdrawals; October 2025, 13.87; November 2025, 25.35; December 2025, 42.82; January 2026, 74.62; February 2026, 162.67; March 2026, 265.53; April 2026, 464.51; May 2026, 659.06; June 2026, 894.63; July 2026, 1033.93; August 2026, 1169.76. Total cashed out 1,169.76 dollars across 254 completed cashouts.">
-      <title>Cashed out from Gemsloot: cumulative withdrawals, Jul 2025 to Aug 2026</title>
-      <desc>Cumulative completed withdrawals from a personal Gemsloot account rise from $5.87 in July 2025 to $1,169.76 in August 2026, with a flat month in September 2025.</desc>
-      <style>
-      .chart-t-title { font-family: 'Barlow Condensed', sans-serif; font-size: 46px; font-weight: 800; letter-spacing: -0.01em; fill: oklch(0.15 0.01 90); }
-      .chart-t-sub   { font-family: 'Inter', Arial, sans-serif; font-size: 21px; fill: oklch(0.45 0.01 90); }
-      .chart-t-stat  { font-family: 'Barlow Condensed', sans-serif; font-size: 52px; font-weight: 800; letter-spacing: -0.01em; fill: oklch(0.48 0.15 148); }
-      .chart-t-mono  { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; letter-spacing: 0.16em; fill: oklch(0.55 0.01 90); }
-      .chart-t-axis  { font-family: 'IBM Plex Mono', monospace; font-size: 15px; fill: oklch(0.5 0.01 90); }
-      .chart-t-note  { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; fill: oklch(0.4 0.01 90); }
-      .chart-t-src   { font-family: 'Inter', Arial, sans-serif; font-size: 16px; fill: oklch(0.55 0.01 90); }
-      .chart-rule    { stroke: oklch(0 0 0 / 0.2); }
-      .chart-grid    { stroke: oklch(0 0 0 / 0.12); }
-      .chart-axis    { stroke: oklch(0 0 0 / 0.2); }
-      .chart-lead    { stroke: oklch(0 0 0 / 0.2); stroke-width: 1; }
-      .chart-series  { fill: none; stroke: oklch(0.48 0.15 148); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
-      .chart-dot     { fill: oklch(0.42 0.15 148); }
-      </style>
+      <div class="chart-frame" data-chart-zoom>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="100%" role="img" aria-label="Line chart titled Cashed out from Gemsloot. Cumulative completed withdrawals from a personal Gemsloot account, month by month, from July 2025 to August 2026. Values in US dollars: July 2025, 5.87; August 2025, 10.02; September 2025, 10.02, a flat month with no withdrawals; October 2025, 13.87; November 2025, 25.35; December 2025, 42.82; January 2026, 74.62; February 2026, 162.67; March 2026, 265.53; April 2026, 464.51; May 2026, 659.06; June 2026, 894.63; July 2026, 1033.93; August 2026, 1169.76. Total cashed out 1,169.76 dollars across 254 completed cashouts.">
+        <title>Cashed out from Gemsloot: cumulative withdrawals, Jul 2025 to Aug 2026</title>
+        <desc>Cumulative completed withdrawals from a personal Gemsloot account rise from $5.87 in July 2025 to $1,169.76 in August 2026, with a flat month in September 2025.</desc>
+        <style>
+        .chart-t-title { font-family: 'Barlow Condensed', sans-serif; font-size: 46px; font-weight: 800; letter-spacing: -0.01em; fill: oklch(0.15 0.01 90); }
+        .chart-t-sub   { font-family: 'Inter', Arial, sans-serif; font-size: 21px; fill: oklch(0.45 0.01 90); }
+        .chart-t-stat  { font-family: 'Barlow Condensed', sans-serif; font-size: 52px; font-weight: 800; letter-spacing: -0.01em; fill: oklch(0.48 0.15 148); }
+        .chart-t-mono  { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; letter-spacing: 0.16em; fill: oklch(0.55 0.01 90); }
+        .chart-t-axis  { font-family: 'IBM Plex Mono', monospace; font-size: 15px; fill: oklch(0.5 0.01 90); }
+        .chart-t-note  { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; fill: oklch(0.4 0.01 90); }
+        .chart-t-src   { font-family: 'Inter', Arial, sans-serif; font-size: 16px; fill: oklch(0.55 0.01 90); }
+        .chart-rule    { stroke: oklch(0 0 0 / 0.2); }
+        .chart-grid    { stroke: oklch(0 0 0 / 0.12); }
+        .chart-axis    { stroke: oklch(0 0 0 / 0.2); }
+        .chart-lead    { stroke: oklch(0 0 0 / 0.2); stroke-width: 1; }
+        .chart-series  { fill: none; stroke: oklch(0.48 0.15 148); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+        .chart-dot     { fill: oklch(0.42 0.15 148); }
+        </style>
 
-      <rect x="0" y="0" width="1600" height="900" fill="oklch(0.97 0.01 90)"></rect>
+        <rect x="0" y="0" width="1600" height="900" fill="oklch(0.97 0.01 90)"></rect>
 
-      <text class="chart-t-title" x="80" y="118">CASHED OUT FROM GEMSLOOT</text>
-      <text class="chart-t-sub" x="80" y="154">Cumulative withdrawals from my own account, month by month</text>
-      <text class="chart-t-stat" x="1520" y="128" text-anchor="end">$1,169.76</text>
-      <text class="chart-t-mono" x="1520" y="158" text-anchor="end">254 CASHOUTS, ALL COMPLETED</text>
+        <text class="chart-t-title" x="80" y="118">CASHED OUT FROM GEMSLOOT</text>
+        <text class="chart-t-sub" x="80" y="154">Cumulative withdrawals from my own account, month by month</text>
+        <text class="chart-t-stat" x="1520" y="128" text-anchor="end">$1,169.76</text>
+        <text class="chart-t-mono" x="1520" y="158" text-anchor="end">254 CASHOUTS, ALL COMPLETED</text>
 
-      <line class="chart-rule" x1="80" y1="200" x2="1520" y2="200" stroke-width="1"></line>
+        <line class="chart-rule" x1="80" y1="200" x2="1520" y2="200" stroke-width="1"></line>
 
-      <line class="chart-grid" x1="200" y1="300" x2="1520" y2="300" stroke-width="1"></line>
-      <line class="chart-grid" x1="200" y1="405" x2="1520" y2="405" stroke-width="1"></line>
-      <line class="chart-grid" x1="200" y1="510" x2="1520" y2="510" stroke-width="1"></line>
-      <line class="chart-grid" x1="200" y1="615" x2="1520" y2="615" stroke-width="1"></line>
-      <line class="chart-axis" x1="200" y1="720" x2="1520" y2="720" stroke-width="1"></line>
+        <line class="chart-grid" x1="200" y1="300" x2="1520" y2="300" stroke-width="1"></line>
+        <line class="chart-grid" x1="200" y1="405" x2="1520" y2="405" stroke-width="1"></line>
+        <line class="chart-grid" x1="200" y1="510" x2="1520" y2="510" stroke-width="1"></line>
+        <line class="chart-grid" x1="200" y1="615" x2="1520" y2="615" stroke-width="1"></line>
+        <line class="chart-axis" x1="200" y1="720" x2="1520" y2="720" stroke-width="1"></line>
 
-      <text class="chart-t-axis" x="176" y="304" text-anchor="end">$1,200</text>
-      <text class="chart-t-axis" x="176" y="409" text-anchor="end">$900</text>
-      <text class="chart-t-axis" x="176" y="514" text-anchor="end">$600</text>
-      <text class="chart-t-axis" x="176" y="619" text-anchor="end">$300</text>
-      <text class="chart-t-axis" x="176" y="724" text-anchor="end">$0</text>
+        <text class="chart-t-axis" x="176" y="304" text-anchor="end">$1,200</text>
+        <text class="chart-t-axis" x="176" y="409" text-anchor="end">$900</text>
+        <text class="chart-t-axis" x="176" y="514" text-anchor="end">$600</text>
+        <text class="chart-t-axis" x="176" y="619" text-anchor="end">$300</text>
+        <text class="chart-t-axis" x="176" y="724" text-anchor="end">$0</text>
 
-      <polyline class="chart-series" points="200,717.95 301.54,716.49 403.08,716.49 504.62,715.15 606.15,711.13 707.69,705.01 809.23,693.88 910.77,663.07 1012.31,627.06 1113.85,557.42 1215.38,489.33 1316.92,406.88 1418.46,358.12 1520,310.58"></polyline>
+        <polyline class="chart-series" points="200,717.95 301.54,716.49 403.08,716.49 504.62,715.15 606.15,711.13 707.69,705.01 809.23,693.88 910.77,663.07 1012.31,627.06 1113.85,557.42 1215.38,489.33 1316.92,406.88 1418.46,358.12 1520,310.58"></polyline>
 
-      <circle class="chart-dot" cx="200" cy="717.95" r="3.5"></circle>
-      <circle class="chart-dot" cx="301.54" cy="716.49" r="3.5"></circle>
-      <circle class="chart-dot" cx="403.08" cy="716.49" r="3.5"></circle>
-      <circle class="chart-dot" cx="504.62" cy="715.15" r="3.5"></circle>
-      <circle class="chart-dot" cx="606.15" cy="711.13" r="3.5"></circle>
-      <circle class="chart-dot" cx="707.69" cy="705.01" r="3.5"></circle>
-      <circle class="chart-dot" cx="809.23" cy="693.88" r="3.5"></circle>
-      <circle class="chart-dot" cx="910.77" cy="663.07" r="3.5"></circle>
-      <circle class="chart-dot" cx="1012.31" cy="627.06" r="3.5"></circle>
-      <circle class="chart-dot" cx="1113.85" cy="557.42" r="3.5"></circle>
-      <circle class="chart-dot" cx="1215.38" cy="489.33" r="3.5"></circle>
-      <circle class="chart-dot" cx="1316.92" cy="406.88" r="3.5"></circle>
-      <circle class="chart-dot" cx="1418.46" cy="358.12" r="3.5"></circle>
-      <circle class="chart-dot" cx="1520" cy="310.58" r="4.5"></circle>
+        <circle class="chart-dot" cx="200" cy="717.95" r="3.5"></circle>
+        <circle class="chart-dot" cx="301.54" cy="716.49" r="3.5"></circle>
+        <circle class="chart-dot" cx="403.08" cy="716.49" r="3.5"></circle>
+        <circle class="chart-dot" cx="504.62" cy="715.15" r="3.5"></circle>
+        <circle class="chart-dot" cx="606.15" cy="711.13" r="3.5"></circle>
+        <circle class="chart-dot" cx="707.69" cy="705.01" r="3.5"></circle>
+        <circle class="chart-dot" cx="809.23" cy="693.88" r="3.5"></circle>
+        <circle class="chart-dot" cx="910.77" cy="663.07" r="3.5"></circle>
+        <circle class="chart-dot" cx="1012.31" cy="627.06" r="3.5"></circle>
+        <circle class="chart-dot" cx="1113.85" cy="557.42" r="3.5"></circle>
+        <circle class="chart-dot" cx="1215.38" cy="489.33" r="3.5"></circle>
+        <circle class="chart-dot" cx="1316.92" cy="406.88" r="3.5"></circle>
+        <circle class="chart-dot" cx="1418.46" cy="358.12" r="3.5"></circle>
+        <circle class="chart-dot" cx="1520" cy="310.58" r="4.5"></circle>
 
-      <line class="chart-lead" x1="200" y1="710" x2="200" y2="662"></line>
-      <line class="chart-lead" x1="200" y1="662" x2="248" y2="662"></line>
-      <text class="chart-t-note" x="258" y="666">FIRST CASHOUT: JUL 10, 2025</text>
+        <line class="chart-lead" x1="200" y1="710" x2="200" y2="662"></line>
+        <line class="chart-lead" x1="200" y1="662" x2="248" y2="662"></line>
+        <text class="chart-t-note" x="258" y="666">FIRST CASHOUT: JUL 10, 2025</text>
 
-      <text class="chart-t-axis" x="200" y="752" text-anchor="middle">JUL 25</text>
-      <text class="chart-t-axis" x="301.54" y="752" text-anchor="middle">AUG 25</text>
-      <text class="chart-t-axis" x="403.08" y="752" text-anchor="middle">SEP 25</text>
-      <text class="chart-t-axis" x="504.62" y="752" text-anchor="middle">OCT 25</text>
-      <text class="chart-t-axis" x="606.15" y="752" text-anchor="middle">NOV 25</text>
-      <text class="chart-t-axis" x="707.69" y="752" text-anchor="middle">DEC 25</text>
-      <text class="chart-t-axis" x="809.23" y="752" text-anchor="middle">JAN 26</text>
-      <text class="chart-t-axis" x="910.77" y="752" text-anchor="middle">FEB 26</text>
-      <text class="chart-t-axis" x="1012.31" y="752" text-anchor="middle">MAR 26</text>
-      <text class="chart-t-axis" x="1113.85" y="752" text-anchor="middle">APR 26</text>
-      <text class="chart-t-axis" x="1215.38" y="752" text-anchor="middle">MAY 26</text>
-      <text class="chart-t-axis" x="1316.92" y="752" text-anchor="middle">JUN 26</text>
-      <text class="chart-t-axis" x="1418.46" y="752" text-anchor="middle">JUL 26</text>
-      <text class="chart-t-axis" x="1520" y="752" text-anchor="middle">AUG 26</text>
+        <text class="chart-t-axis" x="200" y="752" text-anchor="middle">JUL 25</text>
+        <text class="chart-t-axis" x="301.54" y="752" text-anchor="middle">AUG 25</text>
+        <text class="chart-t-axis" x="403.08" y="752" text-anchor="middle">SEP 25</text>
+        <text class="chart-t-axis" x="504.62" y="752" text-anchor="middle">OCT 25</text>
+        <text class="chart-t-axis" x="606.15" y="752" text-anchor="middle">NOV 25</text>
+        <text class="chart-t-axis" x="707.69" y="752" text-anchor="middle">DEC 25</text>
+        <text class="chart-t-axis" x="809.23" y="752" text-anchor="middle">JAN 26</text>
+        <text class="chart-t-axis" x="910.77" y="752" text-anchor="middle">FEB 26</text>
+        <text class="chart-t-axis" x="1012.31" y="752" text-anchor="middle">MAR 26</text>
+        <text class="chart-t-axis" x="1113.85" y="752" text-anchor="middle">APR 26</text>
+        <text class="chart-t-axis" x="1215.38" y="752" text-anchor="middle">MAY 26</text>
+        <text class="chart-t-axis" x="1316.92" y="752" text-anchor="middle">JUN 26</text>
+        <text class="chart-t-axis" x="1418.46" y="752" text-anchor="middle">JUL 26</text>
+        <text class="chart-t-axis" x="1520" y="752" text-anchor="middle">AUG 26</text>
 
-      <line class="chart-rule" x1="80" y1="800" x2="1520" y2="800" stroke-width="1"></line>
-      <text class="chart-t-src" x="80" y="832">Source: full transaction export from my Gemsloot account, Aug 31, 2026. Actual completed withdrawals, not projected.</text>
-      </svg>
-      <div class="proof-caption">It took five months before this added up to anything meaningful. This is a slow build, not a get-rich-quick chart.</div>
+        <line class="chart-rule" x1="80" y1="800" x2="1520" y2="800" stroke-width="1"></line>
+        <text class="chart-t-src" x="80" y="832">Source: full transaction export from my Gemsloot account, Aug 31, 2026. Actual completed withdrawals, not projected.</text>
+        </svg>
+      </div>
+      <div class="chart-foot">
+        <div class="proof-caption">It took five months before this added up to anything meaningful. This is a slow build, not a get-rich-quick chart.</div>
+        <button type="button" class="btn-outline chart-zoom" data-chart-zoom>Enlarge chart ↗</button>
+      </div>
     </div>
   </div>
 </section>
@@ -659,22 +684,54 @@
     lightboxImg.id = 'lightbox-img';
     lightboxImg.alt = '';
     lightbox.insertBefore(lightboxImg, lightbox.firstChild);
+    var lightboxFig = document.createElement('div');
+    lightboxFig.className = 'lightbox-figure';
+    lightboxFig.style.display = 'none';
+    lightbox.insertBefore(lightboxFig, lightbox.firstChild);
+
+    function openOverlay() {
+      lightbox.classList.add('open');
+      document.body.classList.add('lightbox-open');
+    }
 
     function openLightbox(src, alt) {
+      lightboxFig.innerHTML = '';
+      lightboxFig.style.display = 'none';
+      lightboxImg.style.display = '';
       lightboxImg.src = src;
       lightboxImg.alt = alt || '';
-      lightbox.classList.add('open');
+      openOverlay();
+    }
+
+    // The chart is inline SVG, so it is cloned into the lightbox rather than
+    // loaded as a file: that way it keeps the page's fonts and colours.
+    function openChart() {
+      var svg = document.querySelector('.chart-frame svg');
+      if (!svg) return;
+      lightboxImg.style.display = 'none';
+      lightboxImg.removeAttribute('src');
+      lightboxFig.innerHTML = '';
+      lightboxFig.appendChild(svg.cloneNode(true));
+      lightboxFig.style.display = '';
+      openOverlay();
     }
 
     function closeLightbox() {
       lightbox.classList.remove('open');
+      document.body.classList.remove('lightbox-open');
       lightboxImg.removeAttribute('src');
+      lightboxFig.innerHTML = '';
+      lightboxFig.style.display = 'none';
     }
 
     document.querySelectorAll('[data-lightbox]').forEach(function (el) {
       el.addEventListener('click', function () {
         openLightbox(el.getAttribute('data-lightbox'), el.getAttribute('data-alt'));
       });
+    });
+
+    document.querySelectorAll('[data-chart-zoom]').forEach(function (el) {
+      el.addEventListener('click', openChart);
     });
 
     lightbox.addEventListener('click', closeLightbox);
