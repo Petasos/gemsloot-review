@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="100%" role="img" aria-label="Line chart titled Cashed out from Gemsloot. Cumulative completed withdrawals from a personal Gemsloot account, month by month, from July 2025 to August 2026. Values in US dollars: July 2025, 5.87; August 2025, 10.02; September 2025, 10.02, a flat month with no withdrawals; October 2025, 13.87; November 2025, 25.35; December 2025, 42.82; January 2026, 74.62; February 2026, 162.67; March 2026, 265.53; April 2026, 464.51; May 2026, 659.06; June 2026, 894.63; July 2026, 1033.93; August 2026, 1169.76. Total cashed out 1,169.76 dollars across 254 completed cashouts.">
+<title>Cashed out from Gemsloot: cumulative withdrawals, Jul 2025 to Aug 2026</title>
+<desc>Cumulative completed withdrawals from a personal Gemsloot account rise from $5.87 in July 2025 to $1,169.76 in August 2026, with a flat month in September 2025.</desc>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;display=swap');
+.t-title { font-family: 'Barlow Condensed', sans-serif; font-size: 46px; font-weight: 800; letter-spacing: -0.01em; fill: oklch(0.15 0.01 90); }
+.t-sub   { font-family: 'Inter', Arial, sans-serif; font-size: 21px; fill: oklch(0.45 0.01 90); }
+.t-stat  { font-family: 'Barlow Condensed', sans-serif; font-size: 52px; font-weight: 800; letter-spacing: -0.01em; fill: oklch(0.48 0.15 148); }
+.t-mono  { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; letter-spacing: 0.16em; fill: oklch(0.55 0.01 90); }
+.t-axis  { font-family: 'IBM Plex Mono', monospace; font-size: 15px; fill: oklch(0.5 0.01 90); }
+.t-note  { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; fill: oklch(0.4 0.01 90); }
+.t-src   { font-family: 'Inter', Arial, sans-serif; font-size: 16px; fill: oklch(0.55 0.01 90); }
+.rule    { stroke: oklch(0 0 0 / 0.2); }
+.grid    { stroke: oklch(0 0 0 / 0.12); }
+.axis    { stroke: oklch(0 0 0 / 0.2); }
+.lead    { stroke: oklch(0 0 0 / 0.2); stroke-width: 1; }
+.series  { fill: none; stroke: oklch(0.48 0.15 148); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.dot     { fill: oklch(0.42 0.15 148); }
+</style>
+
+
+
+<rect x="0" y="0" width="1600" height="900" fill="oklch(0.97 0.01 90)"></rect>
+
+<text class="t-title" x="80" y="118">CASHED OUT FROM GEMSLOOT</text>
+<text class="t-sub" x="80" y="154">Cumulative withdrawals from my own account, month by month</text>
+<text class="t-stat" x="1520" y="128" text-anchor="end">$1,169.76</text>
+<text class="t-mono" x="1520" y="158" text-anchor="end">254 CASHOUTS, ALL COMPLETED</text>
+
+<line class="rule" x1="80" y1="200" x2="1520" y2="200" stroke-width="1"></line>
+
+<line class="grid" x1="200" y1="300" x2="1520" y2="300" stroke-width="1"></line>
+<line class="grid" x1="200" y1="405" x2="1520" y2="405" stroke-width="1"></line>
+<line class="grid" x1="200" y1="510" x2="1520" y2="510" stroke-width="1"></line>
+<line class="grid" x1="200" y1="615" x2="1520" y2="615" stroke-width="1"></line>
+<line class="axis" x1="200" y1="720" x2="1520" y2="720" stroke-width="1"></line>
+
+<text class="t-axis" x="176" y="304" text-anchor="end">$1,200</text>
+<text class="t-axis" x="176" y="409" text-anchor="end">$900</text>
+<text class="t-axis" x="176" y="514" text-anchor="end">$600</text>
+<text class="t-axis" x="176" y="619" text-anchor="end">$300</text>
+<text class="t-axis" x="176" y="724" text-anchor="end">$0</text>
+
+<polyline class="series" points="200,717.95 301.54,716.49 403.08,716.49 504.62,715.15 606.15,711.13 707.69,705.01 809.23,693.88 910.77,663.07 1012.31,627.06 1113.85,557.42 1215.38,489.33 1316.92,406.88 1418.46,358.12 1520,310.58"></polyline>
+
+<circle class="dot" cx="200" cy="717.95" r="3.5"></circle>
+<circle class="dot" cx="301.54" cy="716.49" r="3.5"></circle>
+<circle class="dot" cx="403.08" cy="716.49" r="3.5"></circle>
+<circle class="dot" cx="504.62" cy="715.15" r="3.5"></circle>
+<circle class="dot" cx="606.15" cy="711.13" r="3.5"></circle>
+<circle class="dot" cx="707.69" cy="705.01" r="3.5"></circle>
+<circle class="dot" cx="809.23" cy="693.88" r="3.5"></circle>
+<circle class="dot" cx="910.77" cy="663.07" r="3.5"></circle>
+<circle class="dot" cx="1012.31" cy="627.06" r="3.5"></circle>
+<circle class="dot" cx="1113.85" cy="557.42" r="3.5"></circle>
+<circle class="dot" cx="1215.38" cy="489.33" r="3.5"></circle>
+<circle class="dot" cx="1316.92" cy="406.88" r="3.5"></circle>
+<circle class="dot" cx="1418.46" cy="358.12" r="3.5"></circle>
+<circle class="dot" cx="1520" cy="310.58" r="4.5"></circle>
+
+<line class="lead" x1="200" y1="710" x2="200" y2="662"></line>
+<line class="lead" x1="200" y1="662" x2="248" y2="662"></line>
+<text class="t-note" x="258" y="666">FIRST CASHOUT: JUL 10, 2025</text>
+
+<text class="t-axis" x="200" y="752" text-anchor="middle">JUL 25</text>
+<text class="t-axis" x="301.54" y="752" text-anchor="middle">AUG 25</text>
+<text class="t-axis" x="403.08" y="752" text-anchor="middle">SEP 25</text>
+<text class="t-axis" x="504.62" y="752" text-anchor="middle">OCT 25</text>
+<text class="t-axis" x="606.15" y="752" text-anchor="middle">NOV 25</text>
+<text class="t-axis" x="707.69" y="752" text-anchor="middle">DEC 25</text>
+<text class="t-axis" x="809.23" y="752" text-anchor="middle">JAN 26</text>
+<text class="t-axis" x="910.77" y="752" text-anchor="middle">FEB 26</text>
+<text class="t-axis" x="1012.31" y="752" text-anchor="middle">MAR 26</text>
+<text class="t-axis" x="1113.85" y="752" text-anchor="middle">APR 26</text>
+<text class="t-axis" x="1215.38" y="752" text-anchor="middle">MAY 26</text>
+<text class="t-axis" x="1316.92" y="752" text-anchor="middle">JUN 26</text>
+<text class="t-axis" x="1418.46" y="752" text-anchor="middle">JUL 26</text>
+<text class="t-axis" x="1520" y="752" text-anchor="middle">AUG 26</text>
+
+<line class="rule" x1="80" y1="800" x2="1520" y2="800" stroke-width="1"></line>
+<text class="t-src" x="80" y="832">Source: full transaction export from my Gemsloot account, Aug 31, 2026. Actual completed withdrawals, not projected.</text>
+</svg>
