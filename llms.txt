@@ -9,11 +9,11 @@ This is a single-page site (gemsloot.win). All content below lives on the one pa
 - Overall rating: 4.2/5
 - Gemsloot is a legitimate GPT (get-paid-to) platform, founded in 2018, earnings tracked directly in US dollars (no points system)
 - Trustpilot rating: 4.1–4.4 across thousands of reviews
-- Earning methods: game offers ($10–40), app installs ($0.50–5), surveys ($0.10–2), referrals (5–30% lifetime commission)
+- Earning methods: game offers ($10–40), app installs ($0.50–5), surveys ($0.10–2), referrals (tiered lifetime commission, 15% at the author's current Tier 7)
 - Cashout methods: PayPal, cryptocurrency, gift cards
-- Minimum withdrawal: $3
+- Minimum withdrawal: $0.50
 - Referral code: cheswick (signup link: https://gemsloot.com/?aff=cheswick&trk=1769)
-- Compared against Freecash: Gemsloot has a lower minimum withdrawal ($3 vs $5) and faster crypto payouts (instant vs within 24h), but fewer offer walls (8+ vs 10+) and a slightly lower Trustpilot rating (4.1–4.4 vs 4.3–4.6)
+- Compared against Freecash: Gemsloot has a lower minimum withdrawal ($0.50 vs $5, Freecash up to $20 in some regions) and faster crypto payouts (under 30 min when tested vs within 24h), but fewer offer walls (8+ vs 10+) and a slightly lower Trustpilot rating (4.1–4.4 vs 4.3–4.6)
 
 ## Page sections
 
