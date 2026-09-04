@@ -139,23 +139,35 @@
   .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.16em; color: oklch(0.55 0.01 90); text-transform: uppercase; }
   h2 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(36px, 4.5vw, 60px); font-weight: 800; letter-spacing: -0.01em; margin: 0 0 32px; text-wrap: pretty; text-transform: uppercase; }
   .section-grid { display: grid; grid-template-columns: 280px 1fr; gap: 64px; }
-  .btn-dark {
+  .btn-primary {
     display: inline-block;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    background: oklch(0.15 0.01 90);
+    background: oklch(0.38 0.15 148);
     color: oklch(0.97 0.01 90);
-    padding: 16px 32px;
     border-radius: 100px;
   }
-  .btn-dark:hover {
-    background: oklch(0.28 0.01 90);
-    color: oklch(0.78 0.17 148);
+  .btn-primary:hover {
+    background: oklch(0.3 0.15 148);
+    color: oklch(0.97 0.01 90);
     text-decoration: underline;
   }
+  .btn-primary.sm { font-size: 13px; padding: 12px 24px; }
+  .btn-primary.md { font-size: 15px; padding: 20px 44px; }
+  .btn-primary.lg { font-size: 17px; padding: 24px 56px; }
+  .cta-microcopy {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: oklch(0.45 0.01 90);
+  }
+  .cta-microcopy strong { color: oklch(0.38 0.15 148); }
+  .hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 32px; margin-top: 48px; padding-top: 28px; border-top: 1px solid oklch(0 0 0 / 0.12); }
+  .step-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 28px; margin-top: 48px; }
+  .code-cta, .verdict-cta { display: flex; flex-direction: column; align-items: center; gap: 18px; }
   .btn-outline {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
@@ -359,7 +371,7 @@
 
 <header>
   <div class="logo">Gemsloot <span>/ Review</span></div>
-  <a class="btn-outline" href="https://gemsloot.com/?aff=cheswick&trk=1769">Visit Gemsloot →</a>
+  <a class="btn-primary sm" href="https://gemsloot.com/?aff=cheswick&trk=1769">Visit Gemsloot →</a>
 </header>
 
 <section class="wrap first hero">
@@ -373,6 +385,10 @@
   <div class="hero-score">
     <div class="num">4.2<small>/5</small></div>
     <p>A legitimate GPT site with real payouts — solid earning potential if you stack referrals with the higher-value offers.</p>
+  </div>
+  <div class="hero-cta">
+    <a class="btn-primary md" href="https://gemsloot.com/?aff=cheswick&trk=1769">Start earning on Gemsloot →</a>
+    <div class="cta-microcopy">Code <strong>cheswick</strong> applied automatically · $0.50 minimum cashout</div>
   </div>
   <div class="author-note">
     <div class="h">Who's behind this review?</div>
@@ -548,7 +564,10 @@
         <div><div class="t">Cash out</div><div class="d">Once your balance clears the minimum, withdraw via PayPal, crypto, or gift card.</div></div>
       </div>
     </div>
-    <a class="btn-dark" style="margin-top:48px" href="https://gemsloot.com/?aff=cheswick&trk=1769">Sign up now →</a>
+    <div class="step-cta">
+      <a class="btn-primary md" href="https://gemsloot.com/?aff=cheswick&trk=1769">Sign up now →</a>
+      <div class="cta-microcopy">Takes about a minute · Code <strong>cheswick</strong> applied automatically</div>
+    </div>
   </div>
 </section>
 
@@ -585,7 +604,10 @@
   <div class="eyebrow" style="margin-bottom:32px">(05) / Referral</div>
   <h2 style="margin-bottom:48px">Use My Referral Code</h2>
   <div class="code-big">cheswick</div>
-  <a class="btn-dark" style="font-size:14px;padding:18px 40px" href="https://gemsloot.com/?aff=cheswick&trk=1769">Sign up with this code →</a>
+  <div class="code-cta">
+    <a class="btn-primary lg" href="https://gemsloot.com/?aff=cheswick&trk=1769">Sign up with this code →</a>
+    <div class="cta-microcopy">Opens gemsloot.com · Code applied automatically</div>
+  </div>
   <div class="tier-note">
     <p class="lead">A note on the referral rates you'll see advertised: the commission works in tiers. I'm currently at Tier 7, which pays 15% on what my referrals earn, and the next tier pays 20%. The top rates are real but you grow into them, so treat the maximum as a ceiling you work toward, not your starting rate.</p>
     <div class="proof-frame" data-lightbox="assets/gemsloot-tier7.png" data-alt="Gemsloot referral page showing my account at Tier 7 with a 15% commission rate">
@@ -663,7 +685,10 @@
   <div class="eyebrow" style="margin-bottom:32px">(08) / Final verdict</div>
   <div class="verdict-score">4.2<small>/5</small></div>
   <p>Gemsloot is a legitimate, long-running GPT site with real cash payouts and a solid Trustpilot track record. If you play the game offers strategically and stack referrals, it's one of the better dollar-based options available.</p>
-  <a class="btn-dark" style="font-size:15px;padding:20px 44px" href="https://gemsloot.com/?aff=cheswick&trk=1769">Start earning on Gemsloot →</a>
+  <div class="verdict-cta">
+    <a class="btn-primary lg" href="https://gemsloot.com/?aff=cheswick&trk=1769">Start earning on Gemsloot →</a>
+    <div class="cta-microcopy">Free to join · $0.50 minimum cashout · Code cheswick applied</div>
+  </div>
 </section>
 
 <div id="lightbox">
