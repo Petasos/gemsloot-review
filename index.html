@@ -295,7 +295,7 @@
   .earn-cell .d { font-size: 15px; color: oklch(0.4 0 0); line-height: 1.6; }
 
   .code-section { text-align: center; }
-  .code-big { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(72px, 11vw, 150px); font-weight: 800; letter-spacing: -0.01em; line-height: 1; margin-bottom: 48px; text-transform: uppercase; }
+  .code-big { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif-condensed, sans-serif; font-size: clamp(72px, 11vw, 150px); font-weight: 800; letter-spacing: -0.01em; line-height: 1; margin-bottom: 48px; text-transform: uppercase; overflow-wrap: anywhere; }
 
   .vs-table { display: grid; grid-template-columns: 1.4fr 1fr 1fr; }
   .vs-table .row { display: contents; }
@@ -372,6 +372,10 @@
     .author-note.with-avatar { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px; }
     .author-avatar { width: 112px; height: 112px; }
   }
+  @media (max-width: 600px) {
+    .hero-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .hero-meta .dot { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -446,7 +450,9 @@
       <div><div class="num">4.2</div><div class="label">Trustpilot (632 reviews)</div></div>
       <div><div class="num">8 yrs</div><div class="label">Running since 2018</div></div>
     </div>
-    <p class="lead" style="margin-bottom:48px">A rating only tells you so much, so I wanted to see it for myself. I use Gemsloot for about 20 minutes per weekday and not at all in the weekend, with a screen time limit on my iPhone, because these apps are built to keep you playing and I don't want it to eat my evenings. Within that routine I tested the cashout myself. On May 29, 2026 I started a withdrawal of $62.28 in Litecoin at 9:05. It landed in my Coinbase wallet at 9:25, twenty minutes later, converting to €53.37 after the payout. I use Coinbase, but you can withdraw to any exchange or wallet you like. The three screenshots below show that same transaction from three different angles: the Gemsloot dashboard confirming the payout was sent, my Coinbase account confirming it arrived, and the public block explorer confirming it exists on-chain. Both timestamps are visible in the screenshots. Anyone can fake one screenshot. Faking all three, with matching amounts and timestamps, is not realistic. That's why I show them together.</p>
+    <p class="lead">A rating only tells you so much, so I wanted to see it for myself. I use Gemsloot for about 20 minutes per weekday and not at all in the weekend, with a screen time limit on my iPhone, because these apps are built to keep you playing and I don't want it to eat my evenings.</p>
+    <p class="lead">Within that routine I tested the cashout myself. On May 29, 2026 I started a withdrawal of $62.28 in Litecoin at 9:05. It landed in my Coinbase wallet at 9:25, twenty minutes later, converting to €53.37 after the payout. I use Coinbase, but you can withdraw to any exchange or wallet you like.</p>
+    <p class="lead" style="margin-bottom:48px">The three screenshots below show that same transaction from three different angles: the Gemsloot dashboard confirming the payout was sent, my Coinbase account confirming it arrived, and the public block explorer confirming it exists on-chain. Both timestamps are visible in the screenshots. Anyone can fake one screenshot. Faking all three, with matching amounts and timestamps, is not realistic. That's why I show them together.</p>
     <div class="proof-grid">
       <div class="proof-col">
         <div class="proof-frame" data-lightbox="assets/coinbase-payout.png" data-alt="Coinbase receipt confirming receipt of a Litecoin withdrawal">
@@ -619,8 +625,7 @@
   <div class="code-big">cheswick</div>
   <div class="code-cta">
     <a class="btn-primary lg" href="https://gemsloot.com/?aff=cheswick&trk=1769">Sign up with this code →</a>
-    <div class="cta-microcopy">Opens gemsloot.com · Code applied · Free bonus wheel spin: <strong>$0.10&nbsp;to&nbsp;$500</strong></div>
-    <div class="proof-caption">Signing up through this link gives you one spin on the bonus wheel ($0.10 to $500, usually $0.10).</div>
+    <div class="cta-microcopy">Opens gemsloot.com · Code applied · Free bonus wheel spin: <strong>$0.10&nbsp;to&nbsp;$500</strong> (usually $0.10)</div>
   </div>
 </section>
 
