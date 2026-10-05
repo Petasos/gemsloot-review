@@ -263,8 +263,8 @@
   .author-note { max-width: 680px; margin-top: 40px; padding: 24px 28px; border: 1px solid oklch(0 0 0 / 0.14); border-radius: 6px; background: oklch(0.99 0.005 90); }
   .author-note .h { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: oklch(0.3 0.01 90); margin-bottom: 12px; }
   .author-note p { margin: 0; font-size: 15px; line-height: 1.65; color: oklch(0.38 0 0); text-wrap: pretty; }
-  .author-note.with-avatar { display: flex; align-items: flex-start; gap: 22px; }
-  .author-avatar { flex: none; width: 76px; height: 76px; border-radius: 50%; object-fit: cover; border: 3px solid oklch(1 0 0); box-shadow: 0 0 0 2px oklch(0.48 0.15 148), 0 4px 12px oklch(0 0 0 / 0.12); }
+  .author-note.with-avatar { max-width: none; display: flex; align-items: center; gap: 36px; padding: 32px 40px; }
+  .author-avatar { flex: none; width: 136px; height: 136px; border-radius: 50%; object-fit: cover; border: 3px solid oklch(1 0 0); box-shadow: 0 0 0 2px oklch(0.48 0.15 148), 0 4px 12px oklch(0 0 0 / 0.12); }
 
   .chart-block { margin-top: 56px; }
   .chart-frame { border: 1px solid oklch(0 0 0 / 0.15); border-radius: 6px; overflow: hidden; cursor: zoom-in; }
@@ -369,8 +369,8 @@
     footer { padding: 48px 24px; }
     #lightbox { padding: 16px; }
     #lightbox .close { top: 16px; right: 20px; }
-    .author-note.with-avatar { gap: 16px; padding: 20px; }
-    .author-avatar { width: 56px; height: 56px; }
+    .author-note.with-avatar { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px; }
+    .author-avatar { width: 112px; height: 112px; }
   }
 </style>
 </head>
@@ -401,7 +401,7 @@
     <div class="cta-microcopy">Code <strong>cheswick</strong> applied automatically · $0.50 minimum cashout</div>
   </div>
   <div class="author-note with-avatar">
-    <img class="author-avatar" src="assets/cheswickrman-avatar.jpg" alt="CheswickrMan, the author of this review" width="76" height="76">
+    <img class="author-avatar" src="assets/cheswickrman-avatar.jpg" alt="CheswickrMan, the author of this review" width="136" height="136">
     <div>
       <div class="h">Who's behind this review?</div>
       <p>I'm CheswickrMan, based in Europe, and you can find me <a href="https://www.reddit.com/user/Bartnnn/" rel="noopener" target="_blank">on Reddit</a>. I've used Gemsloot with my own account since July 2025. My first cashout was on July 10, 2025 and every screenshot on this page comes from that same account. I earn a commission if you sign up through my link, which is exactly why I only make claims I can back up with proof you can check yourself.</p>
