@@ -907,9 +907,20 @@
       e.stopPropagation();
       setOpen(list.hidden);
     });
-    list.addEventListener('click', function (e) {
-      if (e.target.closest('a')) setOpen(false);
-    });
+    // Scroll in-page instead of following the link: in previewers the link
+    // can resolve to another URL and leave the page.
+    function jump(e) {
+      var a = e.target.closest('a');
+      if (!a) return;
+      var target = document.getElementById(a.hash.slice(1));
+      setOpen(false);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView();
+      try { history.replaceState(null, '', '#' + target.id); } catch (err) {}
+    }
+    list.addEventListener('click', jump);
+    document.querySelector('.toc-grid').addEventListener('click', jump);
     document.addEventListener('click', function (e) {
       if (!list.hidden && !e.target.closest('.section-nav')) setOpen(false);
     });
