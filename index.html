@@ -321,6 +321,44 @@
   .verdict-score small { font-size: 0.3em; color: oklch(0.5 0.01 90); font-family: 'IBM Plex Mono', monospace; }
   .verdict p { font-size: 20px; line-height: 1.7; color: oklch(0.28 0 0); max-width: 620px; margin: 0 auto 48px; text-wrap: pretty; }
 
+  /* Section navigator in the sticky header: shows the section you are in and
+     opens a jump list. It only appears once the inline contents list has
+     scrolled out of view, so the two never compete. */
+  html { scroll-padding-top: var(--header-h, 80px); }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  .section-nav { position: relative; flex: 0 1 auto; min-width: 0; opacity: 0; visibility: hidden; transition: opacity .2s, visibility .2s; }
+  header.nav-active .section-nav { opacity: 1; visibility: visible; }
+  .section-nav-toggle {
+    display: flex; align-items: center; gap: 10px; width: 100%; min-width: 0;
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: oklch(0.15 0.01 90);
+    background: oklch(0.99 0.005 90 / 0.6); border: 1px solid oklch(0 0 0 / 0.2);
+    border-radius: 100px; padding: 10px 18px; cursor: pointer;
+  }
+  .section-nav-toggle:hover, .section-nav-toggle[aria-expanded="true"] { border-color: oklch(0 0 0 / 0.55); }
+  .section-nav-toggle .sn-num { color: oklch(0.48 0.15 148); flex: none; }
+  .section-nav-toggle .sn-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .section-nav-toggle .sn-caret { flex: none; transition: transform .2s; }
+  .section-nav-toggle[aria-expanded="true"] .sn-caret { transform: rotate(180deg); }
+  .section-nav-list {
+    position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+    width: 320px; max-height: calc(100vh - var(--header-h, 80px) - 24px); overflow: auto;
+    margin: 0; padding: 8px; list-style: none;
+    background: oklch(0.99 0.005 90); border: 1px solid oklch(0 0 0 / 0.15); border-radius: 8px;
+    box-shadow: 0 12px 32px oklch(0 0 0 / 0.14);
+  }
+  .section-nav-list[hidden] { display: none; }
+  .section-nav-list a {
+    display: flex; gap: 14px; padding: 11px 12px; border-radius: 5px;
+    font-size: 15px; font-weight: 600; color: oklch(0.15 0 0);
+  }
+  .section-nav-list a span { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 400; color: oklch(0.55 0.01 90); }
+  .section-nav-list a:hover { background: oklch(0 0 0 / 0.05); color: oklch(0.15 0 0); }
+  .section-nav-list a[aria-current="true"] { background: oklch(0.48 0.15 148 / 0.1); color: oklch(0.38 0.15 148); }
+  .section-nav-list a[aria-current="true"] span { color: oklch(0.48 0.15 148); }
+  .read-progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; pointer-events: none; }
+  .read-progress span { display: block; height: 100%; background: oklch(0.48 0.15 148); transform-origin: left; transform: scaleX(0); }
+
   #lightbox {
     display: none;
     position: fixed;
@@ -357,6 +395,13 @@
     .wrap { padding: 56px 24px; }
     header { padding: 20px 24px; }
     header .btn-primary.sm { font-size: 12px; padding: 10px 18px; }
+    header { flex-wrap: nowrap; }
+    header .btn-primary.sm { flex: none; white-space: nowrap; }
+    header.nav-active .logo { display: none; }
+    header.nav-active .section-nav { flex: 1 1 auto; }
+    .section-nav { position: static; }
+    .section-nav-toggle { padding: 9px 14px; }
+    .section-nav-list { left: 24px; right: 24px; top: calc(100% + 6px); width: auto; transform: none; }
     .section-grid { grid-template-columns: 1fr; gap: 24px; }
     .toc-grid { grid-template-columns: 1fr; }
     .proof-grid { grid-template-columns: 1fr; }
@@ -370,6 +415,10 @@
     .author-note.with-avatar { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px; }
     .author-avatar { width: 112px; height: 112px; }
   }
+  @media (max-width: 380px) {
+    .section-nav-toggle .sn-title { display: none; }
+    .section-nav-toggle { width: auto; }
+  }
   @media (max-width: 600px) {
     .hero-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
     .hero-meta .dot { display: none; }
@@ -381,7 +430,14 @@
 
 <header>
   <div class="logo">Gemsloot <span>/ Review</span></div>
+  <nav class="section-nav" aria-label="Sections">
+    <button type="button" class="section-nav-toggle" aria-expanded="false" aria-controls="section-nav-list">
+      <span class="sn-num">(01)</span><span class="sn-title">What is Gemsloot?</span><span class="sn-caret" aria-hidden="true">▾</span>
+    </button>
+    <ol id="section-nav-list" class="section-nav-list" hidden></ol>
+  </nav>
   <a class="btn-primary sm" href="https://gemsloot.com/?aff=cheswick&trk=1769">Visit Gemsloot →</a>
+  <div class="read-progress" aria-hidden="true"><span></span></div>
 </header>
 
 <section class="wrap first hero">
@@ -412,7 +468,7 @@
   </div>
 </section>
 
-<section class="wrap">
+<section id="contents" class="wrap">
   <div class="eyebrow" style="margin-bottom:28px">/ Contents</div>
   <div class="toc-grid">
     <a href="#what-is"><span>(01)</span>What is Gemsloot?</a>
@@ -812,6 +868,88 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeLightbox();
     });
+  })();
+</script>
+
+<script>
+  // Section navigator: builds its jump list from the inline contents list,
+  // tracks the section in view, and shows reading progress.
+  (function () {
+    var header = document.querySelector('header');
+    var toc = document.getElementById('contents');
+    var toggle = document.querySelector('.section-nav-toggle');
+    var list = document.getElementById('section-nav-list');
+    var numEl = toggle.querySelector('.sn-num');
+    var titleEl = toggle.querySelector('.sn-title');
+    var bar = document.querySelector('.read-progress span');
+
+    var items = [];
+    document.querySelectorAll('.toc-grid a').forEach(function (src) {
+      var section = document.querySelector(src.getAttribute('href'));
+      if (!section) return;
+      var li = document.createElement('li');
+      var a = src.cloneNode(true);
+      li.appendChild(a);
+      list.appendChild(li);
+      var num = src.querySelector('span').textContent;
+      items.push({ section: section, link: a, num: num, title: src.textContent.replace(num, '').trim() });
+    });
+
+    function setOpen(open) {
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      list.hidden = !open;
+    }
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setOpen(list.hidden);
+    });
+    list.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('click', function (e) {
+      if (!list.hidden && !e.target.closest('.section-nav')) setOpen(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !list.hidden) { setOpen(false); toggle.focus(); }
+    });
+
+    var current = -1;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var headerH = header.offsetHeight;
+      document.documentElement.style.setProperty('--header-h', headerH + 'px');
+
+      var active = toc.getBoundingClientRect().bottom < headerH;
+      header.classList.toggle('nav-active', active);
+      if (!active && !list.hidden) setOpen(false);
+
+      // The current section is the last one whose top has passed a line a
+      // third of the way down the visible area under the header.
+      var line = headerH + (window.innerHeight - headerH) / 3;
+      var idx = 0;
+      items.forEach(function (it, i) {
+        if (it.section.getBoundingClientRect().top <= line) idx = i;
+      });
+      var doc = document.documentElement;
+      if (window.innerHeight + window.scrollY >= doc.scrollHeight - 2) idx = items.length - 1;
+      if (idx !== current) {
+        if (items[current]) items[current].link.removeAttribute('aria-current');
+        current = idx;
+        items[idx].link.setAttribute('aria-current', 'true');
+        numEl.textContent = items[idx].num;
+        titleEl.textContent = items[idx].title;
+      }
+
+      var max = doc.scrollHeight - window.innerHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
+    }
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
   })();
 </script>
 
